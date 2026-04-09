@@ -1,0 +1,19 @@
+# IDE
+.idea/
+
+# Python cache
+__pycache__/
+
+# Virtual env
+venv/
+.venv/
+venv-cop/
+
+# FAISS DB
+faiss_index/
+
+# Mac
+.DS_Store
+
+.env
+Backend/.env
