@@ -1,0 +1,375 @@
+<mxfile host="app.diagrams.net" modified="2026-04-25T00:00:00.000Z" agent="Codex" version="24.7.17">
+  <diagram id="ai-copilot-flow" name="AI COPILOT Program Flow">
+    <mxGraphModel dx="1742" dy="1048" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="AI COPILOT: End-to-End Program Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="10" width="500" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client" value="Client / Frontend / API Consumer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="120" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="startup" value="1. Startup &amp; Initialization" style="swimlane;html=1;rounded=1;startSize=30;fontStyle=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="60" width="520" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="FastAPI app boots" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="startup">
+          <mxGeometry x="20" y="50" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="Load FAISS index&#xa;from Backend/faiss_index" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="startup">
+          <mxGeometry x="190" y="50" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="Index found?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="startup">
+          <mxGeometry x="395" y="45" width="95" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="Build retriever&#xa;(k = 5)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="startup">
+          <mxGeometry x="180" y="135" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="Build RAG chain&#xa;with Ollama llama3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="startup">
+          <mxGeometry x="345" y="135" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" value="API ready" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="startup">
+          <mxGeometry x="20" y="135" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="api" value="2. API Endpoints" style="swimlane;html=1;rounded=1;startSize=30;fontStyle=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="330" width="220" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="POST /extract-preview" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="api">
+          <mxGeometry x="20" y="55" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="POST /upload" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="api">
+          <mxGeometry x="20" y="135" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="POST /ask" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="api">
+          <mxGeometry x="20" y="215" width="180" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="extract" value="3. Extraction Layer" style="swimlane;html=1;rounded=1;startSize=30;fontStyle=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="290" y="330" width="500" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="Read uploaded file bytes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="20" y="55" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="Detect file type" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="230" y="50" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="TXT&#xa;UTF-8 decode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="360" y="40" width="110" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="DOCX&#xa;Read paragraphs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="360" y="95" width="110" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="PDF mode&#xa;parse / ocr / auto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="40" y="165" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="pypdf text extraction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="230" y="165" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="Quality good?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="395" y="160" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="Render PDF pages&#xa;to images" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="40" y="270" width="150" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="OCR provider router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="220" y="272" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="Tesseract" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="extract">
+          <mxGeometry x="390" y="250" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="PaddleOCR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="extract">
+          <mxGeometry x="390" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="docTR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="extract">
+          <mxGeometry x="390" y="350" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="TrOCR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="extract">
+          <mxGeometry x="390" y="400" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="Build ExtractionResult&#xa;+ metrics + page preview" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="150" y="455" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="/extract-preview response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="extract">
+          <mxGeometry x="170" y="525" width="170" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ingest" value="4. Upload / Ingestion / Indexing" style="swimlane;html=1;rounded=1;startSize=30;fontStyle=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="830" y="330" width="430" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="i1" value="Validate extracted text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="25" y="60" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="i2" value="Text present?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="225" y="55" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i3" value="Return error:&#xa;No readable text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="25" y="145" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="i4" value="Chunk text with&#xa;RecursiveCharacterTextSplitter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="225" y="145" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i5" value="chunk_size = 500&#xa;chunk_overlap = 100" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="ingest">
+          <mxGeometry x="225" y="220" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="i6" value="Vector DB already in memory?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="225" y="295" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="i7" value="Create embeddings&#xa;with OllamaEmbeddings llama3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="20" y="315" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i8" value="Create new FAISS index&#xa;+ save locally" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="20" y="405" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i9" value="Add chunks to existing&#xa;FAISS + save" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="245" y="405" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i10" value="Refresh retriever&#xa;+ rebuild RAG chain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="245" y="490" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i11" value="/upload response&#xa;message + chunks_added + metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="ingest">
+          <mxGeometry x="120" y="495" width="170" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="query" value="5. Query-Time RAG Flow" style="swimlane;html=1;rounded=1;startSize=30;fontStyle=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="330" width="560" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="q1" value="Check vector DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="20" y="60" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="q2" value="DB exists?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="190" y="55" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="q3" value="Return error:&#xa;No vector stored yet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="20" y="140" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="q4" value="Ensure retriever&#xa;+ RAG chain exist" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="305" y="55" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="q5" value="Retrieve top 5 chunks&#xa;from FAISS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="305" y="145" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="q6" value="Prompt: answer only&#xa;from retrieved context" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="305" y="235" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="q7" value="Ollama llama3&#xa;generates answer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="305" y="320" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="q8" value="/ask response&#xa;answer + source chunks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="query">
+          <mxGeometry x="115" y="320" width="160" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="infra" value="6. Core Components / Local Services" style="swimlane;html=1;rounded=1;startSize=30;fontStyle=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="790" width="560" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="FAISS index&#xa;Backend/faiss_index" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="infra">
+          <mxGeometry x="35" y="70" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="Local Ollama&#xa;Embeddings + LLM&#xa;model: llama3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="infra">
+          <mxGeometry x="220" y="75" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="OCR assets / models&#xa;tesseract, paddleocr, docTR, TrOCR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" vertex="1" parent="infra">
+          <mxGeometry x="405" y="75" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend" value="Read left to right: startup -&gt; endpoint -&gt; extraction -&gt; ingestion/query -&gt; local services" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1010" width="700" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_client_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="client" target="s1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_s1_s2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="startup" source="s1" target="s2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s2_s3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="startup" source="s2" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s3_s4" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="startup" source="s3" target="s4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s4_s5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="startup" source="s4" target="s5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s5_s6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="startup" source="s5" target="s6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s3_s6" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="startup" source="s3" target="s6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_client_api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="client" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_client_api2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="client" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_client_api3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="client" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_a1_e1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="a1" target="e1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_a2_e1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="a2" target="e1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e1_e2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e1" target="e2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e2_e3" value="TXT" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e2" target="e3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e2_e4" value="DOCX" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e2" target="e4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e2_e5" value="PDF" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e2" target="e5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e5_e6" value="parse / auto" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e5" target="e6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e6_e7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e6" target="e7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e5_e8" value="ocr" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e5" target="e8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e7_e14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e7" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e7_e8" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e7" target="e8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e8_e9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e8" target="e9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e9_e10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e9" target="e10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e9_e11" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e9" target="e11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e9_e12" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e9" target="e12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e9_e13" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e9" target="e13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e10_e14" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e10" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e11_e14" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e11" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e12_e14" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e12" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e13_e14" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e13" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e3_e14" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e3" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e4_e14" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e4" target="e14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e14_e15" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="extract" source="e14" target="e15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_e14_i1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="e14" target="i1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i1_i2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i1" target="i2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i2_i3" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i2" target="i3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i2_i4" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i2" target="i4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i4_i5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i4" target="i5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i5_i6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i5" target="i6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i6_i7" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i6" target="i7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i7_i8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i7" target="i8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i6_i9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i6" target="i9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i9_i10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i9" target="i10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i8_i11" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i8" target="i11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i10_i11" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="ingest" source="i10" target="i11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_a3_q1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeWidth=2;" edge="1" parent="1" source="a3" target="q1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q1_q2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q1" target="q2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q2_q3" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q2" target="q3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q2_q4" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q2" target="q4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q4_q5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q4" target="q5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q5_q6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q5" target="q6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q6_q7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q6" target="q7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q7_q8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" edge="1" parent="query" source="q7" target="q8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_s2_d1" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="s2" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i8_d1" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="i8" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i9_d1" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="i9" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q5_d1" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="q5" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_i7_d2" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="i7" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_s5_d2" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="s5" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_q7_d2" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="q7" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_e9_d3" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;endArrow=block;endFill=1;strokeColor=#d79b00;" edge="1" parent="1" source="e9" target="d3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

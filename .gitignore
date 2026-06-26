@@ -1,8 +1,11 @@
 # IDE
 .idea/
+.vscode/
 
 # Python cache
 __pycache__/
+*.pyc
+*.pyo
 
 # Virtual env
 venv/
@@ -12,8 +15,40 @@ venv-cop/
 # FAISS DB
 faiss_index/
 
+# Local persistence (dev fallback)
+Backend/storage/
+Backend/app.sqlite
+Backend/review_checkpoints.sqlite*
+
+# OCR model weights (too large for GitHub)
+Backend/ocr_assets/
+
+# Frontend env + build
+frontend/.env
+frontend/dist/
+node_modules/
+
+# Environment / secrets
+.env
+Backend/.env
+
 # Mac
 .DS_Store
 
-.env
-Backend/.env
+# AI assistant config
+.claude/
+CLAUDE.md
+
+# Personal documents (not project code)
+*.pdf
+AI_Copilot_Report_Content.txt
+
+# One-off scripts
+set_keys.py
+generate_report.py
+
+# Test files
+test_files/
+
+# Deprecated
+frontend_old/
